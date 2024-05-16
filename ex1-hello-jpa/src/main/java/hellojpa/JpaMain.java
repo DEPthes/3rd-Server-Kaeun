@@ -18,14 +18,11 @@ public class JpaMain {
         tx.begin();
 
        try {
-           List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                   .setFirstResult(5)
-                   .setMaxResults(8)
-                   .getResultList();
+           Member member = new Member();
+           member.setId(2L);
+           member.setName("Hello");
 
-           for (Member member : result) {
-               System.out.println("member.name = " + member.getName());
-           }
+           em.persist(member);
 
            tx.commit();
        } catch(Exception e) {
