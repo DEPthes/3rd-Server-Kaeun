@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DooGi. | 글 수정</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main-container">
+  <div class="left-container">
+    <div th:style="${'width:210px'}">
+      <div class="date">
+        <div class="date-text">TODAY</div>
+        <div class="date-date" th:text="${#temporals.format(today, 'yy.MM.dd')}"></div>
+      </div>
+      <div>
+        <div class="profile-text">DooGi.</div>
+        <div th:style="${'height:210px'}">
+          <img th:style="${'height:210px; width:210px'}" th:src="@{/images/default.png}">
+        </div>
+        <div class="profile-name" th:text="${nickname}"></div>
+      </div>
+      <div class="navbar">
+        <div class="nav">
+          <img class="nav-img" th:src="@{/images/read.png}">
+          <a class="nav-a" th:href="@{/}">게시판 보기</a>
+        </div>
+        <div class="nav">
+          <img class="nav-img" th:src="@{/images/myread.png}">
+          <a class="nav-a" th:href="@{/mylist}">내 글 보기</a>
+        </div>
+        <div class="nav">
+          <img class="nav-img" th:src="@{/images/write.png}">
+          <a class="nav-a" th:href="@{/post}">새 글 작성</a>
+        </div>
+        <div class="nav">
+          <img class="nav-img" th:src="@{/images/profile.png}">
+          <a class="nav-a" th:href="@{/}">프로필 관리</a>
+        </div>
+      </div>
+      <div class="logout">
+        <a class="logout-a" th:href="${session.userId == null ? '/login' : '/logout'}"
+           th:text="${session.userId == null ? '로그인' : '로그아웃'}"></a>
+      </div>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="right-container">
+      <div th:style="${'width:746px'}">
+        <div class="header-center">
+          <h2>DooGi.</h2>
+        </div>
+        <form th:action="@{'/post/edit/' + ${boardDto.id}}" method="post">
+          <div class="info-right">
+            <p>
+              <span class="detail-info-label">작성자</span>
+              <span class="detail-info-content" th:text="${boardDto.nickname}"></span>
+            </p>
+          </div>
+          <input type="hidden" name="_method" value="put"/>
+          <input type="hidden" name="id" th:value="${boardDto.id}"/>
+          <input class="title" type="text" name="title" th:value="${boardDto.title}" placeholder="제목을 입력해주세요">
+          <textarea class="content" name="content" th:text="${boardDto.content}" placeholder="내용을 입력해주세요"></textarea>
+          <div class="info-right">
+            <input class="list-btn" type="submit" value="글 수정하기">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="stickers">
+      <div class="sticker"></div>
+      <div class="sticker"></div>
+      <div class="sticker"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

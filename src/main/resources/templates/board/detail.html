@@ -65,8 +65,14 @@
                     </div>
                     <div class="title" th:text="${boardDto.title}"></div>
                     <div class="content" th:text="${boardDto.content}"></div>
-                    <div class="info-right">
-                        <a class="list-btn" th:href="@{/}">목록 보기</a>
+                    <div class="info-between">
+                        <div>
+                            <a class="edit-btn" th:style="'background-color: #7BAEBA;'" th:href="@{'/post/edit/' + ${boardDto.id}}" th:if="${session.userId eq boardDto.userId}">수정</a>
+                            <a class="edit-btn" th:style="'background-color: #B68282;'" th:href="@{/}" th:if="${session.userId eq boardDto.userId}">삭졔</a>
+                        </div>
+                        <div>
+                            <a class="edit-btn" th:style="'background-color: #76C5D7;'" th:href="@{/}">목록 보기</a>
+                        </div>
                     </div>
                 </div>
             </div>

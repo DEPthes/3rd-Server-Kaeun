@@ -404,6 +404,12 @@ tbody td {
   justify-content: right;
 }
 
+.info-between {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .detail-info-label {
   font-family: "GmarketSansMedium";
   font-weight: 400;
@@ -463,6 +469,16 @@ tbody td {
   color: #fff;
   background-color: #76c5d7;
   padding: 5px 16px;
+}
+
+.edit-btn {
+  border: none;
+  border-radius: 10px;
+  font-family: "GmarketSansMedium";
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  padding: 9px 16px 7px;
 }
 
 .stickers {

@@ -6,10 +6,7 @@ import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import project.project.dto.BoardDto;
 import project.project.dto.UserDto;
 import project.project.service.BoardService;
@@ -100,6 +97,38 @@ public class BoardController {
         model.addAttribute("boardDto", boardService.getPost(id));
 
         return "board/detail.html";
+    }
+
+    //특정 게시글의 내용을 수정 부분을 보여주는 메소드
+    @GetMapping("/post/edit/{postId}")
+    public String edit(@PathVariable("postId") Long id, Model model) {
+        Long userId = (Long) httpSession.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        addCommonAttributes(model, userId);
+        model.addAttribute("boardDto", boardService.getPost(id));
+
+        return "board/update.html";
+    }
+
+    //특정 게시글의 내용을 수정하는 메소드
+    @PutMapping("/post/edit/{postId}")
+    public String update(BoardDto boardDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "board/update.html";
+        } else {
+            Long userId = (Long) httpSession.getAttribute("userId");
+            if (userId == null) {
+                return "redirect:/login";
+            }
+
+            boardDto.setUserId(userId);
+            boardService.savePost(boardDto);
+
+            return "redirect:/";
+        }
     }
 
     //게시글 제목을 검색하는 메소드
