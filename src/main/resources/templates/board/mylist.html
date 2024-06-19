@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DooGi. | 내 글</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        function goToPost(postId) {
+            window.location.href = '/post/' + postId;
+        }
+    </script>
+</head>
+<body>
+<div class="main-container">
+    <div class="left-container">
+        <div th:style="${'width:210px'}">
+            <div class="date">
+                <div class="date-text">TODAY</div>
+                <div class="date-date" th:text="${#temporals.format(today, 'yy.MM.dd')}"></div>
+            </div>
+            <div>
+                <div class="profile-text">DooGi.</div>
+                <div th:style="${'height:210px'}">
+                    <img th:style="${'height:210px; width:210px'}" th:src="@{/images/default.png}">
+                </div>
+                <div class="profile-name" th:text="${nickname}"></div>
+            </div>
+            <div class="navbar">
+                <div class="nav">
+                    <img class="nav-img" th:src="@{/images/read.png}">
+                    <a class="nav-a" th:href="@{/}">게시판 보기</a>
+                </div>
+                <div class="nav">
+                    <img class="nav-img" th:src="@{/images/myread.png}">
+                    <a class="nav-a-select" th:href="@{/mylist}">내 글 보기</a>
+                </div>
+                <div class="nav">
+                    <img class="nav-img" th:src="@{/images/write.png}">
+                    <a class="nav-a" th:href="@{/post}">새 글 작성</a>
+                </div>
+                <div class="nav">
+                    <img class="nav-img" th:src="@{/images/profile.png}">
+                    <a class="nav-a" th:href="@{/}">프로필 관리</a>
+                </div>
+            </div>
+            <div class="logout">
+                <a class="logout-a" th:href="${session.userId == null ? '/login' : '/logout'}"
+                   th:text="${session.userId == null ? '로그인' : '로그아웃'}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="right-container">
+            <div th:style="${'width:746px'}">
+                <div class="header">
+                    <h2>DooGi.</h2>
+                    <form action="/mylist/search" method="GET">
+                        <input class="search" name="keyword" type="text" placeholder="검색어를 입력해주세요">
+                    </form>
+                </div>
+                <table class="table-list">
+                    <thead>
+                    <tr>
+                        <th th:style="${'width:66px'}">번호</th>
+                        <th th:style="${'width:447px'}">제목</th>
+                        <th th:style="${'width:133px'}">작성자</th>
+                        <th th:style="${'width:100px'}">날짜<th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="board : ${boardList}" th:onclick="'goToPost(' + ${board.id} + ')'">
+                        <td th:style="${'width:66px'}">
+                            <span th:text="${board.postNumber}"></span>
+                        </td>
+                        <td th:style="${'width:447px'}">
+                            <span th:text="${board.title}"></span>
+                        </td>
+                        <td th:style="${'width:133px'}">
+                            <span th:text="${board.nickname}"></span>
+                        </td>
+                        <td th:style="${'width:100px'}">
+                            <span th:text="${#temporals.format(board.createdAt, 'yy.MM.dd')}"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="page-btn">
+                        <span>
+                            <a th:if="${hasPreviousPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage - 1) : '/?page=' + (currentPage - 1)}">
+                                <img class="page-img" th:src="@{/images/left.png}">
+                            </a>
+                            <img th:unless="${hasPreviousPage}" class="page-img" th:src="@{/images/leftnone.png}">
+                        </span>
+                    <span class="page-num" th:text="${currentPage}"></span>
+                    <span>
+                            <a th:if="${hasNextPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage + 1) : '/?page=' + (currentPage + 1)}">
+                                <img class="page-img" th:src="@{/images/right.png}">
+                            </a>
+                            <img th:unless="${hasNextPage}" class="page-img" th:src="@{/images/rightnone.png}">
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="stickers">
+            <div class="sticker"></div>
+            <div class="sticker"></div>
+            <div class="sticker"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

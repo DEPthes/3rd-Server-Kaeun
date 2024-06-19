@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DooGi. | 로그인</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>DooGi.</h1>
+        <form action="/login" method="post">
+            <div class="login-form">
+                <label class="login-label" for="username">Username</label>
+                <input class="login-input" type="text" id="username" name="username" placeholder="아이디를 입력해주세요" required>
+            </div>
+            <div class="login-form">
+                <label class="login-label" for="password">Password</label>
+                <input class="login-input" type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+            </div>
+            <div>
+                <input class="login-button" type="submit" value="Login">
+            </div>
+        </form>
+        <div>
+            <span class="login-span">계정이 있으신가요?</span>
+            <a class="login-a" th:href="@{/signup}">가입하기</a>
+        </div>
+    </div>
+</body>
+</html>
