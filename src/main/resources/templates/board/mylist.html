@@ -89,14 +89,14 @@
                 </table>
                 <div class="page-btn">
                         <span>
-                            <a th:if="${hasPreviousPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage - 1) : '/?page=' + (currentPage - 1)}">
+                            <a th:if="${hasPreviousPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage - 1) : '/mylist?page=' + (currentPage - 1)}">
                                 <img class="page-img" th:src="@{/images/left.png}">
                             </a>
                             <img th:unless="${hasPreviousPage}" class="page-img" th:src="@{/images/leftnone.png}">
                         </span>
                     <span class="page-num" th:text="${currentPage}"></span>
                     <span>
-                            <a th:if="${hasNextPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage + 1) : '/?page=' + (currentPage + 1)}">
+                            <a th:if="${hasNextPage}" th:href="${keyword != null and keyword != '' ? '/mylist/search?keyword=' + keyword + '&page=' + (currentPage + 1) : '/mylist?page=' + (currentPage + 1)}">
                                 <img class="page-img" th:src="@{/images/right.png}">
                             </a>
                             <img th:unless="${hasNextPage}" class="page-img" th:src="@{/images/rightnone.png}">
