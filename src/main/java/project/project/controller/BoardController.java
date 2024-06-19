@@ -131,6 +131,14 @@ public class BoardController {
         }
     }
 
+    //특정 게시글을 삭제하는 메소드
+    @DeleteMapping("/post/{postId}")
+    public String delete(@PathVariable("postId") Long id) {
+        boardService.deletePost(id);
+
+        return "redirect:/";
+    }
+
     //게시글 제목을 검색하는 메소드
     @GetMapping("/board/search")
     public String search(@RequestParam(value = "keyword") String keyword, @RequestParam(value = "page", defaultValue = "1") Integer pageNum, Model model) {

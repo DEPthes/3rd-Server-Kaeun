@@ -68,7 +68,10 @@
                     <div class="info-between">
                         <div>
                             <a class="edit-btn" th:style="'background-color: #7BAEBA;'" th:href="@{'/post/edit/' + ${boardDto.id}}" th:if="${session.userId eq boardDto.userId}">수정</a>
-                            <a class="edit-btn" th:style="'background-color: #B68282;'" th:href="@{/}" th:if="${session.userId eq boardDto.userId}">삭졔</a>
+                            <form th:if="${session.userId eq boardDto.userId}" id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post" style="display: inline;">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button class="edit-btn" th:style="'background-color: #B68282;'" id="delete-btn">삭제</button>
+                            </form>
                         </div>
                         <div>
                             <a class="edit-btn" th:style="'background-color: #76C5D7;'" th:href="@{/}">목록 보기</a>

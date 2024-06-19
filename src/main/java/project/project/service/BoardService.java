@@ -125,6 +125,12 @@ public class BoardService {
         return boardDto;
     }
 
+    //특정 게시글을 삭제
+    @Transactional
+    public void deletePost(Long id) {
+        boardRepository.deleteById(id);
+    }
+
     //특정 키워드를 포함하는 게시글을 페이지네이션하여 반환
     @Transactional
     public List<BoardDto> searchPosts(String keyword, Integer pageNum) {
