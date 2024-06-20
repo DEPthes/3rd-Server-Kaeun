@@ -2,9 +2,14 @@ package project.project.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import project.project.dto.UserDto;
 import project.project.entity.UserEntity;
 import project.project.repository.UserRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {

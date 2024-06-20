@@ -35,4 +35,11 @@ public class LoginController {
             return "redirect:/login";
         }
     }
+
+    //로그아웃을 처리하는 메소드
+    @GetMapping("/logout")
+    public String logoutUser() {
+        session.invalidate();
+        return "redirect:/login";
+    }
 }

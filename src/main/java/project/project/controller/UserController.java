@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import project.project.dto.UserDto;
 import project.project.service.UserService;
+
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -26,11 +29,12 @@ public class UserController {
 
     //회원가입 폼 제출을 처리하는 메소드
     @PostMapping("/signup")
-    public String registerUser(@Valid UserDto userDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String registerUser(@Valid UserDto userDto, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("userDto", userDto); //회원가입 실패시 입력 데이터값 유지
             return "user/signup.html";
         }
         userService.saveUser(userDto);
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

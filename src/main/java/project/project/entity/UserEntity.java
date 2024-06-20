@@ -16,15 +16,15 @@ public class UserEntity {
     private Long id;
 
     @Column(length=8, nullable = false, unique = true)
-    @Size(min=2, message = "닉네임은 최소 2글자 이상이어야 합니다.")
+    @Size(min=2, max=8, message = "닉네임은 2~8자이어야 합니다.")
     private String nickname;
 
     @Column(length=20, nullable = false, unique = true)
-    @Size(min=6, message = "아이디는 최소 6글자 이상이어야 합니다.")
+    @Size(min=6, max=20, message = "아이디는 6~20자이어야 합니다.")
     private String username;
 
     @Column(length=20, nullable = false)
-    @Size(min=8, message = "비밀번호는 최소 8글자 이상이어야 합니다.")
+    @Size(min=8, max=20, message = "비밀번호는 8~20자이어야 합니다.")
     private String password;
 
     @Builder

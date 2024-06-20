@@ -14,15 +14,15 @@
         <form action="/signup" method="post">
             <div class="login-form">
                 <label class="login-label" for="username">Username</label>
-                <input class="login-input" type="text" id="username" name="username" placeholder="아이디 입력 (6~20자)" required>
+                <input class="login-input" type="text" id="username" name="username" th:value="${userDto.username}" placeholder="아이디 입력 (6~20자)" required>
             </div>
             <div class="login-form">
                 <label class="login-label" for="password">Password</label>
-                <input class="login-input" type="password" id="password" name="password" placeholder="비밀번호 입력 (8~20자)" required>
+                <input class="login-input" type="password" id="password" name="password" th:value="${userDto.password}" placeholder="비밀번호 입력 (8~20자)" required>
             </div>
             <div class="login-form">
                 <label class="login-label" for="username">Nickname</label>
-                <input class="login-input" type="text" id="nickname" name="nickname" placeholder="닉네임 입력 (2~8자)" required>
+                <input class="login-input" type="text" id="nickname" name="nickname" th:value="${userDto.nickname}" placeholder="닉네임 입력 (2~8자)" required>
             </div>
             <div>
                 <input class="login-button" type="submit" value="Signup">

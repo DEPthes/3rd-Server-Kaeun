@@ -69,7 +69,7 @@ public class BoardController {
 
     //글 작성 폼을 제출받아 저장하는 메소드
     @PostMapping("/post")
-    public String write(@Valid BoardDto boardDto, BindingResult bindingResult) {
+    public String write(@Valid BoardDto boardDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "board/write.html";
         } else {
@@ -77,6 +77,8 @@ public class BoardController {
             if (userId == null) {
                 return "redirect:/login";
             }
+
+            addCommonAttributes(model, userId);
 
             boardDto.setUserId(userId);
             boardService.savePost(boardDto);
